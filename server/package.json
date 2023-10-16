@@ -10,7 +10,7 @@
 	"keywords": [
 		"justlearn-backend"
 	],
-	"author": "Saikat Mukherjee",
+	"author": "Chintu Kumar",
 	"license": "ISC",
 	"dependencies": {
 		"bcrypt": "^5.1.1",
