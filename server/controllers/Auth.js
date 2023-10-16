@@ -6,7 +6,7 @@ const otpGenerator = require("otp-generator")
 const mailSender = require("../utils/mailSender")
 const { passwordUpdated } = require("../mail/templates/passwordUpdate")
 const Profile = require("../models/Profile")
-require("dotenv").config()
+//require("dotenv").config()
 
 // Signup Controller for Registering USers
 
