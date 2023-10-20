@@ -172,7 +172,7 @@ const Footer = () => {
             })}
           </div>
 
-          <div className="text-center">Made with ❤️ Rison Group © 2023 JustLearn EdTech Pvt. Ltd.</div>
+          <div className="text-center">Made with ❤️ by Chintu Kumar{/*Rison Group © 2023 JustLearn EdTech Pvt. Ltd.*/}</div>
         </div>
       </div>
     </div>
