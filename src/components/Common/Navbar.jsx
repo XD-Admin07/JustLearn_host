@@ -67,9 +67,11 @@ function Navbar() {
     >
       <div className="flex w-11/12  max-w-maxContent items-center justify-between">
         {/* Logo */}
-        <Link to="/">
+        <Link to="/" className="flex">
           <img src={logo} alt="Logo" width={150} height={28} loading="lazy" />
+          <div className="ml-2 mt-3 text-xs w-[35px] h-[17px] text-[#2CC3F2] border border-sky-500 text-center rounded-xl items-center">beta</div>
         </Link>
+        
         {/* Navigation links */}
         <nav className="hidden md:block">
           <ul className="flex gap-x-6 text-richblack-25">
