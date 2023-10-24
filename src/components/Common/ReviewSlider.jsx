@@ -18,6 +18,49 @@ import { apiConnector } from "../../services/apiConnector"
 import { ratingsEndpoints } from "../../services/apis"
 
 function ReviewSlider() {
+
+   //responsive start
+   const [slidesPerView, setSlidesPerView] = useState(4);
+  const [currentW, setCurrentW]=useState(getCurrentW());
+
+  function getCurrentW(){
+    return {
+        width: window.innerWidth,
+        
+    }
+  }
+  
+
+  useEffect(()=>{
+    const updateDimension = () => {
+      setCurrentW(getCurrentW());
+  }
+  window.addEventListener('resize', updateDimension);
+
+  if(currentW.width<=607)
+  {
+   setSlidesPerView(1);
+  }
+  else if(currentW.width>607 && currentW.width<1100)
+  {
+    setSlidesPerView(2);
+  }
+  else
+  setSlidesPerView(4);
+  return(() => {
+
+
+    window.removeEventListener('resize', updateDimension);
+})
+
+ 
+
+  
+
+  },[currentW])
+
+  //responsive end
+
   const [reviews, setReviews] = useState([])
   const truncateWords = 15
 
@@ -37,9 +80,10 @@ function ReviewSlider() {
 
   return (
     <div className="text-white w-[90%]">
+     
       <div className="my-[50px] h-[184px] max-w-maxContentTab lg:max-w-maxContent">
         <Swiper
-          slidesPerView={4}
+          slidesPerView={slidesPerView}
           spaceBetween={25}
           loop={true}
           freeMode={true}
