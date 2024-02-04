@@ -2,7 +2,7 @@ import { useState } from "react"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { useDispatch } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
-
+import OAuth from "./OAuth";
 import { login } from "../../../services/operations/authAPI"
 
 function LoginForm() {
@@ -83,6 +83,13 @@ function LoginForm() {
       >
         Sign In
       </button>
+      <div class="flex items-center justify-center my-0">
+        <hr class="border-t border-gray-300 w-full text-[#646363]" />
+        <span class="mx-4 text-gray-500 text-sm text-[#646363]">OR</span>
+        <hr class="border-t border-gray-300 w-full text-[#646363]" />
+      </div>
+
+      <OAuth />
     </form>
   )
 }

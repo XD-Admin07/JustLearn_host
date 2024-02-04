@@ -6,6 +6,7 @@ const otpGenerator = require("otp-generator")
 const mailSender = require("../utils/mailSender")
 const { passwordUpdated } = require("../mail/templates/passwordUpdate")
 const Profile = require("../models/Profile")
+
 //require("dotenv").config()
 
 // Signup Controller for Registering USers
@@ -111,7 +112,78 @@ exports.signup = async (req, res) => {
     })
   }
 }
+exports.google = async (req, res, next) => {
+  //const {accounttype}=req.body;
+  //const token=req.body;
+  //console.log('data',jwtDecode(token));
+  try {
+    const user = await User.findOne({ email: req.body.email });
+    if (user) {
+      const token = jwt.sign({ email:user.email,id: user._id,role:user.role }, process.env.JWT_SECRET);
+      const { password: hashedPassword, ...rest } = user._doc;
+      user.token=token;
+      const options={
+        expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+        httpOnly: true,
+      }
+      //const expiryDate = new Date(Date.now() + 3600000); // 1 hour
+      res
+        .cookie('token', token, options)
+        .status(200)
+        .json({
+          success: true,
+          token,
+          user,
+          message: `User Login Success`,
+        });
+    } else {
+      const generatedPassword =
+        Math.random().toString(36).slice(-8) +
+        Math.random().toString(36).slice(-8);
+      const hashedPassword = bcrypt.hashSync(generatedPassword, 10);
+          // Create the Additional Profile For User
+    const profileDetails = await Profile.create({
+      gender: null,
+      dateOfBirth: null,
+      about: null,
+      contactNumber: null,
+    })
+      const newUser = new User({
+        /*username:
+          req.body.name.split(' ').join('').toLowerCase() +
+          Math.random().toString(36).slice(-8),*/
+        firstName:req.body.firstName,
+        lastName:req.body.lastName,
+        accountType:req.body.accounttype,
+        email: req.body.email,
+        password: hashedPassword,
+        additionalDetails: profileDetails._id,
+        image: req.body.photo,
+      });
+      await newUser.save();
+      const token = jwt.sign({ email:newUser.email,id: newUser._id,role:user.role }, process.env.JWT_SECRET);
+      const { password: hashedPassword2, ...rest } = newUser._doc;
+      user.token=token;
+      //const expiryDate = new Date(Date.now() + 3600000); // 1 hour
+      const options={
+        expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+        httpOnly: true,
+      }
+      res
+        .cookie('token', token,options)
+        .status(200)
+        .json({
+          success: true,
+          token,
+          user,
+          message: `User registered Successfully`,
 
+        });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
 // Login controller for authenticating users
 exports.login = async (req, res) => {
   try {

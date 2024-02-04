@@ -6,8 +6,10 @@ const router = express.Router()
 const {
   login,
   signup,
+  google,
   sendotp,
   changePassword,
+
 } = require("../controllers/Auth")
 const {
   resetPasswordToken,
@@ -25,6 +27,8 @@ const { auth } = require("../middleware/auth")
 // Route for user login
 router.post("/login", login)
 
+//route for google login
+router.post('/google', google);
 // Route for user signup
 router.post("/signup", signup)
 

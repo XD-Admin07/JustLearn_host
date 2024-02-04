@@ -15,6 +15,7 @@
     "copy-to-clipboard": "^3.3.3",
     "dotenv": "^16.3.1",
     "fileupload": "^1.0.0",
+    "firebase": "^10.8.0",
     "has-own-prop": "^3.1.0",
     "install": "^0.13.0",
     "node": "^20.7.0",

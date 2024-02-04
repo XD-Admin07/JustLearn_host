@@ -11,6 +11,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const cloudinary = require("./config/cloudinary");
 const fileupload = require("express-fileupload");
+const {google} =require("./controllers/Auth");
 
 //const dotenv = require("dotenv");
 
@@ -42,6 +43,7 @@ app.use(cookieParser());
 app.use(
 	cors({
 		origin: "https://just-learn-frontend.vercel.app",
+		//origin: "http://localhost:3000",
 		credentials: true,
 	})
 );

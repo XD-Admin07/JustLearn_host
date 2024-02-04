@@ -8,7 +8,7 @@ import { sendOtp } from "../../../services/operations/authAPI"
 import { setSignupData } from "../../../slices/authSlice"
 import { ACCOUNT_TYPE } from "../../../utils/constants"
 import Tab from "../../Common/Tab"
-
+import OAuth from "./OAuth";
 function SignupForm() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -187,6 +187,12 @@ function SignupForm() {
         >
           Create Account
         </button>
+       <div class="flex items-center justify-center my-0">
+        <hr class="border-t border-gray-300 w-full text-[#646363]" />
+        <span class="mx-4 text-gray-500 text-sm text-[#646363]">OR</span>
+        <hr class="border-t border-gray-300 w-full text-[#646363]" />
+      </div>
+        <OAuth/>
       </form>
     </div>
   )
